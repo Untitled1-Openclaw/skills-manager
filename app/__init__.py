@@ -1,0 +1,1 @@
+"""Skills Manager application package."""

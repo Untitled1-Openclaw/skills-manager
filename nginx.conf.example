@@ -1,0 +1,16 @@
+# Add this inside the existing HTTPS server block for example.com.
+# Do not create a second server block with the same server_name for this route.
+location = /skills {
+    return 301 /skills/;
+}
+
+location /skills/ {
+    proxy_pass http://127.0.0.1:8098/;
+    proxy_http_version 1.1;
+    proxy_set_header Host $host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Forwarded-Prefix /skills;
+    proxy_redirect off;
+}
